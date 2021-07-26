@@ -182,6 +182,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jButton5.setText("Nhập Lại");
 
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-add-25.png"))); // NOI18N
         jButton6.setText("Lưu");
 
         javax.swing.GroupLayout JPanelNhapHangHoaLayout = new javax.swing.GroupLayout(JPanelNhapHangHoa);
