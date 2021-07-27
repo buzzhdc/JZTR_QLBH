@@ -5,10 +5,17 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ductr
  */
 public interface SanPhamInterface {
+    public int themSanPham();
+    public int updateSanPham();
+    public int themLoaiSP();
+    ArrayList getAll();
+    ArrayList search();
     
 }
