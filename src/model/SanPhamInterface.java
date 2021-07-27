@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author ductr
  */
 public interface SanPhamInterface {
-    public int themSanPham();
+    public int themSanPham(SanPham sp);
     public int updateSanPham();
     public int themLoaiSP();
     ArrayList getAll();

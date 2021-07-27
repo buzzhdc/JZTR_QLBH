@@ -5,6 +5,11 @@
  */
 package Test;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 /**
  *
  * @author thanh
@@ -12,5 +17,9 @@ package Test;
 public class TestDuAn {
     public static void main(String[] args) {
         System.out.println("Hí anh em");
+        
+        String date=java.time.LocalDate.now()+"";
+        System.out.print(date);
+        
     }
 }

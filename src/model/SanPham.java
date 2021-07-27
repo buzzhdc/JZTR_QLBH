@@ -5,9 +5,12 @@
  */
 package model;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -198,11 +201,19 @@ public class SanPham {
         this.soLuongMin = soLuongMin;
     }
     public boolean isOutOfDate(){
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c1 = Calendar.getInstance();
         Calendar c2 = Calendar.getInstance();
-        c1.setTime(NSX);
-        c2.setTime(HSD);
+        String date=java.time.LocalDate.now()+"";
+        Date currentDate;
+        try {
+            currentDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+             c1.setTime(currentDate);
+            c2.setTime(HSD);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+       
         long noDay =(c2.getTime().getTime()-c1.getTime().getTime()/(24*3600*1000));
         return noDay<=HSDMin;
     }
