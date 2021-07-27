@@ -29,7 +29,8 @@ public class SanPham {
     public SanPham() {
     }
 
-    public SanPham(int maHang, int loHang, int maLoai, String tenHang, double giaNhap, double giaBan, int soLuong, Date NSX, Date HSD, int HSDMin, int soLuongMin) {
+    public SanPham(int maHang, int loHang, int maLoai, String tenHang, double giaNhap, 
+            double giaBan, int soLuong, Date NSX, Date HSD, int HSDMin, int soLuongMin) {
         this.maHang = maHang;
         this.loHang = loHang;
         this.maLoai = maLoai;
