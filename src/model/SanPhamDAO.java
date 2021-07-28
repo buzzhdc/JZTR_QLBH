@@ -6,10 +6,15 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,7 +25,7 @@ public class SanPhamDAO implements SanPhamInterface{
     Connection connec;
     String url;
     public SanPhamDAO(){
-        url="jdbc:sqlserver://localhost:1433;databaseName=QLBANHANG;userName=QLBanHangAdmin;password=12345";
+        url="jdbc:sqlserver://localhost:1433;databaseName=QLBANHANG;userName=sa;password=123";
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connec=DriverManager.getConnection(url);
@@ -47,9 +52,9 @@ public class SanPhamDAO implements SanPhamInterface{
             ps.setString(9, sp.getHSD());
             ps.setInt(10, sp.getHSDMin());
             kq = ps.executeUpdate();//Trả về 0 đăng nhập thất bại, !=0 thành công
-            ps.clearBatch();
+           // ps.clearBatch();
             ps.close();
-            connec.close();
+          //  connec.close();
             //connec.rollback();
             return kq;
         } catch (SQLException e) {
@@ -78,8 +83,8 @@ public class SanPhamDAO implements SanPhamInterface{
             ps.setInt(10, sp.getHSDMin());
             ps.setInt(11, sp.getMaHang());
             kq = ps.executeUpdate();
-            ps.close();
-            connec.close();
+           // ps.close();
+           // connec.close();
             return kq;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Lỗi");
@@ -90,13 +95,44 @@ public class SanPhamDAO implements SanPhamInterface{
     }
 
     @Override
-    public int themLoaiSP() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int themLoaiSP(LoaiHang lh) {
+        int kq=0;
+        try{
+            PreparedStatement ps=connec.prepareCall("insert into loaihang values(?,?)");
+            ps.setString(1,lh.getTenLoai());
+            ps.setInt(2, lh.getMaLoai());
+            kq=ps.executeUpdate();
+            ps.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            kq=0;
+        }
+        return kq;
     }
 
     @Override
     public ArrayList getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<SanPham> list = new ArrayList<SanPham>();
+        Statement stmt;
+        try{
+            stmt=connec.createStatement();
+            ResultSet rs=stmt.executeQuery("select * from hanghoa");
+            while(rs.next()){
+                SanPham temp= new SanPham();
+                temp.setMaHang(rs.getInt(1));
+                temp.setLoHang(rs.getInt(2));
+                temp.setMaLoai(rs.getInt(3));
+                temp.setTenHang(rs.getString(4));
+                temp.setHSD(rs.getString(10));
+                list.add(temp);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+        
     }
 
     @Override
@@ -107,6 +143,37 @@ public class SanPhamDAO implements SanPhamInterface{
     @Override
     public int updateSanPham() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public SanPham getByID(int id) {
+        SanPham temp=new SanPham();
+        try{
+            Statement stmt=connec.createStatement();
+            ResultSet  rs=stmt.executeQuery("select * from hanghoa where mahang="+id);
+            if(rs.next()){
+                temp.setMaHang(rs.getInt(1));
+                temp.setLoHang(rs.getInt(2));
+                temp.setMaLoai(rs.getInt(3));
+                temp.setTenHang(rs.getString(4));
+                temp.setGiaNhap(rs.getFloat(5));
+                temp.setGiaBan(rs.getFloat(6));
+                temp.setSoLuong(rs.getInt(7));
+                temp.setSoLuongMin(rs.getInt(8));
+                temp.setNSX(rs.getString(9));
+                temp.setHSD(rs.getString(10));
+                temp.setHSDMin(rs.getInt(11));
+                rs.close();
+                stmt.close();
+            }else{
+                return null;
+            }
+            return temp;
+        } catch (SQLException ex) {
+            return null;
+            }
+        
+        
     }
     
 }

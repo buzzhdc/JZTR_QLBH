@@ -24,8 +24,8 @@ public class SanPham {
     private double giaNhap;
     private double giaBan;
     private int soLuong;
-    private Date NSX;
-    private Date HSD;
+    private String NSX;
+    private String HSD;
     private int HSDMin;
     private int soLuongMin;
 
@@ -33,7 +33,7 @@ public class SanPham {
     }
 
     public SanPham(int maHang, int loHang, int maLoai, String tenHang, double giaNhap, 
-            double giaBan, int soLuong, Date NSX, Date HSD, int HSDMin, int soLuongMin) {
+            double giaBan, int soLuong, String NSX, String HSD, int HSDMin, int soLuongMin) {
         this.maHang = maHang;
         this.loHang = loHang;
         this.maLoai = maLoai;
@@ -148,28 +148,28 @@ public class SanPham {
     /**
      * @return the NSX
      */
-    public Date getNSX() {
+    public String getNSX() {
         return NSX;
     }
 
     /**
      * @param NSX the NSX to set
      */
-    public void setNSX(Date NSX) {
+    public void setNSX(String NSX) {
         this.NSX = NSX;
     }
 
     /**
      * @return the HSD
      */
-    public Date getHSD() {
+    public String getHSD() {
         return HSD;
     }
 
     /**
      * @param HSD the HSD to set
      */
-    public void setHSD(Date HSD) {
+    public void setHSD(String HSD) {
         this.HSD = HSD;
     }
 
@@ -200,22 +200,15 @@ public class SanPham {
     public void setSoLuongMin(int soLuongMin) {
         this.soLuongMin = soLuongMin;
     }
-    public boolean isOutOfDate(){
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar c1 = Calendar.getInstance();
-        Calendar c2 = Calendar.getInstance();
-        String date=java.time.LocalDate.now()+"";
-        Date currentDate;
-        try {
-            currentDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-             c1.setTime(currentDate);
-            c2.setTime(HSD);
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-        }
-       
-        long noDay =(c2.getTime().getTime()-c1.getTime().getTime()/(24*3600*1000));
-        return noDay<=HSDMin;
+    public boolean isOutOfDate() throws ParseException{
+        Date NSXd= new SimpleDateFormat("yyyyMMdd").parse(this.NSX);
+        Date HSDd =new SimpleDateFormat("yyyyMMdd").parse(this.HSD);
+        long diff=HSDd.getTime()-NSXd.getTime();
+        
+        if(diff<=soLuongMin){
+            return true;
+        }else return false;
+        
     }
     public boolean isLowAmout(){
         return soLuong<=soLuongMin;

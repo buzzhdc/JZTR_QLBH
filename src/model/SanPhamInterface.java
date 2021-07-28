@@ -14,7 +14,8 @@ import java.util.ArrayList;
 public interface SanPhamInterface {
     public int themSanPham(SanPham sp);
     public int updateSanPham();
-    public int themLoaiSP();
+    public int themLoaiSP(LoaiHang lh);
+    public SanPham getByID(int id);
     ArrayList getAll();
     ArrayList search();
     
