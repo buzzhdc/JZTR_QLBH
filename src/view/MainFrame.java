@@ -26,10 +26,10 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         VisiblePanel(jPanelBanHang);
-       // showNoti();
+       showNoti();
     }
     private void showNoti(){
-        Noti n= new Noti(this, true);
+        Notification n= new Notification(this, true);
         n.setVisible(true);
     }
     private boolean CheckForm() {

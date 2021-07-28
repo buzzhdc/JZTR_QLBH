@@ -203,11 +203,9 @@ public class SanPham {
     public boolean isOutOfDate() throws ParseException{
         Date NSXd= new SimpleDateFormat("yyyyMMdd").parse(this.NSX);
         Date HSDd =new SimpleDateFormat("yyyyMMdd").parse(this.HSD);
-        long diff=HSDd.getTime()-NSXd.getTime();
+        int diff=HSDd.getDay()-NSXd.getDay();
         
-        if(diff<=soLuongMin){
-            return true;
-        }else return false;
+        return diff<HSDMin;
         
     }
     public boolean isLowAmout(){

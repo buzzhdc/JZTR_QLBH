@@ -25,7 +25,8 @@ public class SanPhamDAO implements SanPhamInterface{
     Connection connec;
     String url;
     public SanPhamDAO(){
-        url="jdbc:sqlserver://localhost:1433;databaseName=QLBANHANG;userName=sa;password=123";
+        url="jdbc:sqlserver://localhost:1433;databaseName=QLBANHANG;userName=sa;"
+                + "password=123";
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connec=DriverManager.getConnection(url);
@@ -111,7 +112,7 @@ public class SanPhamDAO implements SanPhamInterface{
     }
 
     @Override
-    public ArrayList getAll() {
+    public ArrayList<SanPham> getAll() {
         ArrayList<SanPham> list = new ArrayList<SanPham>();
         Statement stmt;
         try{
@@ -121,7 +122,7 @@ public class SanPhamDAO implements SanPhamInterface{
                 SanPham temp= new SanPham();
                 temp.setMaHang(rs.getInt(1));
                 temp.setLoHang(rs.getInt(2));
-                temp.setMaLoai(rs.getInt(3));
+                temp.setNSX(rs.getString(9));
                 temp.setTenHang(rs.getString(4));
                 temp.setHSD(rs.getString(10));
                 list.add(temp);
