@@ -25,8 +25,7 @@ public class SanPhamDAO implements SanPhamInterface{
     Connection connec;
     String url;
     public SanPhamDAO(){
-        url="jdbc:sqlserver://localhost:1433;databaseName=QLBANHANG;userName=sa;"
-                + "password=123";
+        url="jdbc:sqlserver://localhost:1433;databaseName=QLBANHANG;userName=sa;password=123";
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connec=DriverManager.getConnection(url);
