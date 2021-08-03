@@ -13,11 +13,13 @@ public class HoaDon {
     private String maHoaDon;
     private int maKhachHang;
     private String maNV;
+    private double tongTien;
 
-    public HoaDon(String maHoaDon, int maKhachHang, String maNV) {
+    public HoaDon(String maHoaDon, int maKhachHang, String maNV, double tongTien) {
         this.maHoaDon = maHoaDon;
         this.maKhachHang = maKhachHang;
         this.maNV = maNV;
+        this.tongTien=tongTien;
 
     }
 
@@ -65,5 +67,10 @@ public class HoaDon {
     public void setMaNV(String maNV) {
         this.maNV = maNV;
     }
-
+    public void setTongTien(double tongTien){
+        this.tongTien=tongTien;
+    }
+    public double getTongTien(){
+        return tongTien;
+    }
 }

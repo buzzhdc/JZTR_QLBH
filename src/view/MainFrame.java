@@ -1239,14 +1239,12 @@ public class MainFrame extends javax.swing.JFrame {
         temp.setMaHoaDon(maHD.getText());
         hdctDAO.addHoaDonCT(temp);
         listHDCT.add(temp);
-        JOptionPane.showMessageDialog(rootPane, txtThanhTien.getText());
         fillToHoaDon();
         if(!txtTongTien.getText().equals("")){
             double tongTien= Double.parseDouble(txtTongTien.getText());
             double thanhTien=Double.parseDouble(txtThanhTien.getText());
-            tongTien=tongTien+thanhTien;
             int ck= Integer.parseInt(txtCK.getText());
-            tongTien=tongTien-tongTien*ck/100;
+            tongTien=tongTien+thanhTien*(100-ck)/100;
             txtTongTien.setText(tongTien+"");
         }else{
             double tongTien=Double.parseDouble(txtThanhTien.getText());
@@ -1259,7 +1257,17 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void ThemHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemHoaDonActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, "In hóa đơn thành công");
+        HoaDon temp = new HoaDon();
+        temp.setMaHoaDon(maHD.getText());
+        temp.setMaKhachHang(Integer.parseInt(maKH.getText()));
+        temp.setMaNV(maNV.getText());
+        temp.setTongTien(Double.parseDouble(txtTongTien.getText()));
+        int kq= hdDAO.UpdateHoaDon(temp);
+        if(kq==1){
+            JOptionPane.showMessageDialog(rootPane, "In hóa đơn thành công");
+        }else{
+            JOptionPane.showMessageDialog(rootPane, kq);
+        }
         MaSP.setText("");
         txtSoLuongNhap.setText("");
         txtDonGia.setText("");
@@ -1270,6 +1278,8 @@ public class MainFrame extends javax.swing.JFrame {
         maHD.setText("");
         txtCK.setText("");
         txtTongTien.setText("");
+        listHDCT.clear();
+        resetTable();
         
     }//GEN-LAST:event_ThemHoaDonActionPerformed
 
@@ -1280,6 +1290,8 @@ public class MainFrame extends javax.swing.JFrame {
         HoaDon temp = new HoaDon();
         temp.setMaHoaDon(maHD.getText());
         temp.setMaKhachHang(Integer.parseInt(maKH.getText()));
+        temp.setTongTien(0);
+        temp.setMaNV("NV001");
         temp.setMaNV(maNV.getText());
         int kq=hdDAO.ThemHoaDon(temp);
         listHDCT.clear();
@@ -1477,7 +1489,6 @@ public class MainFrame extends javax.swing.JFrame {
                 Double.parseDouble(txtDonGia.getText())*listHDCT.get(listHDCT.size()-1).getSoLuong()
             };
             model.addRow(row);
-            
         }
     }
 
@@ -1488,5 +1499,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
         return "0";
+    }
+
+    private void resetTable() {
+        DefaultTableModel model =(DefaultTableModel)tblHoaDon.getModel();
+        model.setRowCount(0);
     }
 }

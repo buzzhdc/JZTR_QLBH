@@ -69,8 +69,9 @@ public class SanPhamDAO implements SanPhamInterface{
         int kq = 0;
         try {
             PreparedStatement ps = connec.prepareStatement(
-                    "update HangHoa set LOHANG = ?, MALOAI = ?, TENHANG =?, GIANHAP =?, "
-                            + "GIABAN = ?, SOLUONG =?, SOLUONGMIN =?, NSX =?, HSD =?, HSDMIN =? WHERE MAHANG = ?");
+             "update HangHoa set LOHANG = ?, MALOAI = ?, TENHANG =?, GIANHAP =?, "
+         + "GIABAN = ?, SOLUONG =?, SOLUONGMIN =?, NSX =?, HSD =?, HSDMIN =?"
+                     + " WHERE MAHANG = ?");
             ps.setInt(1, sp.getLoHang());
             ps.setInt(2, sp.getMaLoai());
             ps.setString(3, sp.getTenHang());

@@ -11,5 +11,5 @@ package model;
  */
 public interface HoaDonIplm {
     public int ThemHoaDon(HoaDon hd);
-    
+    public int UpdateHoaDon(HoaDon hd);
 }
