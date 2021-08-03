@@ -10,17 +10,15 @@ package model;
  * @author ductr
  */
 public class HoaDonCT {
-    private int maHoaDon;
+    private String maHoaDon;
     private int maHoaDonCT;
     private int maHang;
-    private int loHang;
     private int soLuong;
 
-    public HoaDonCT(int maHoaDon, int maHoaDonCT, int maHang, int loHang, int soLuong) {
+    public HoaDonCT(String maHoaDon, int maHoaDonCT, int maHang, int loHang, int soLuong) {
         this.maHoaDon = maHoaDon;
         this.maHoaDonCT = maHoaDonCT;
         this.maHang = maHang;
-        this.loHang = loHang;
         this.soLuong = soLuong;
     }
 
@@ -30,14 +28,14 @@ public class HoaDonCT {
     /**
      * @return the maHoaDon
      */
-    public int getMaHoaDon() {
+    public String getMaHoaDon() {
         return maHoaDon;
     }
 
     /**
      * @param maHoaDon the maHoaDon to set
      */
-    public void setMaHoaDon(int maHoaDon) {
+    public void setMaHoaDon(String maHoaDon) {
         this.maHoaDon = maHoaDon;
     }
 
@@ -72,16 +70,10 @@ public class HoaDonCT {
     /**
      * @return the loHang
      */
-    public int getLoHang() {
-        return loHang;
-    }
 
     /**
      * @param loHang the loHang to set
-     */
-    public void setLoHang(int loHang) {
-        this.loHang = loHang;
-    }
+
 
     /**
      * @return the soLuong

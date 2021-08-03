@@ -10,16 +10,15 @@ package model;
  * @author ductr
  */
 public class HoaDon {
-    private int maHoaDon;
+    private String maHoaDon;
     private int maKhachHang;
-    private int maNV;
-    private String ngayMua;
+    private String maNV;
 
-    public HoaDon(int maHoaDon, int maKhachHang, int maNV, String ngayMua) {
+    public HoaDon(String maHoaDon, int maKhachHang, String maNV) {
         this.maHoaDon = maHoaDon;
         this.maKhachHang = maKhachHang;
         this.maNV = maNV;
-        this.ngayMua = ngayMua;
+
     }
 
     public HoaDon() {
@@ -28,14 +27,14 @@ public class HoaDon {
     /**
      * @return the maHoaDon
      */
-    public int getMaHoaDon() {
+    public String getMaHoaDon() {
         return maHoaDon;
     }
 
     /**
      * @param maHoaDon the maHoaDon to set
      */
-    public void setMaHoaDon(int maHoaDon) {
+    public void setMaHoaDon(String maHoaDon) {
         this.maHoaDon = maHoaDon;
     }
 
@@ -56,28 +55,15 @@ public class HoaDon {
     /**
      * @return the maNV
      */
-    public int getMaNV() {
+    public String getMaNV() {
         return maNV;
     }
 
     /**
      * @param maNV the maNV to set
      */
-    public void setMaNV(int maNV) {
+    public void setMaNV(String maNV) {
         this.maNV = maNV;
     }
 
-    /**
-     * @return the ngayMua
-     */
-    public String getNgayMua() {
-        return ngayMua;
-    }
-
-    /**
-     * @param ngayMua the ngayMua to set
-     */
-    public void setNgayMua(String ngayMua) {
-        this.ngayMua = ngayMua;
-    }
 }

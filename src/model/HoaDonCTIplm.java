@@ -10,6 +10,6 @@ package model;
  * @author ductr
  */
 public interface HoaDonCTIplm {
-    public int addHoaDonCT();
+    public int addHoaDonCT(HoaDonCT hd);
     
 }

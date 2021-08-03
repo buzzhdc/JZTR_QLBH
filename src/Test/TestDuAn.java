@@ -29,6 +29,7 @@ public class TestDuAn {
         list=dao.getAll();
         boolean a= list.get(list.size()-1).isOutOfDate();
         System.out.print(a);
+        System.out.println(java.time.LocalDateTime.now()); 
         //git commit
        
     }
