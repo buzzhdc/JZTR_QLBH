@@ -50,8 +50,14 @@ public class HoaDonCTDAO implements HoaDonCTIplm{
     public int updateSP(HoaDonCT ct) {
         int kq=0;
         try {
-            PreparedStatement ps = cn.prepareStatement("");
-            
+            PreparedStatement ps = cn.prepareStatement
+        ("update HANGHOA set SOLUONG = ((select SOLUONG from HANGHOA where "
+                + "MAHANG = ? )-?) where MAHANG =?");
+            ps.setInt(1, ct.getMaHang());
+            ps.setInt(2, ct.getSoLuong());
+            ps.setInt(3, ct.getMaHang());
+            kq=ps.executeUpdate();
+            ps.close();
         } catch (SQLException ex) {
 
         }
