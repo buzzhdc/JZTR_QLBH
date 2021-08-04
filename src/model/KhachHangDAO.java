@@ -19,7 +19,7 @@ public class KhachHangDAO {
     String url;
 
     public KhachHangDAO() {
-        url="jdbc:sqlserver://localhost:1433;databaseName=QLBANHANG;userName=QLBanHangAdmin;password=12345";
+        url="jdbc:sqlserver://localhost:1433;databaseName=QLBANHANG;userName=sa;password=123";
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             cn=DriverManager.getConnection(url);
