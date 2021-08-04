@@ -11,5 +11,6 @@ package model;
  */
 public interface HoaDonCTIplm {
     public int addHoaDonCT(HoaDonCT hd);
+    public int updateSP(HoaDonCT ct);
     
 }

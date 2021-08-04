@@ -45,6 +45,18 @@ public class HoaDonCTDAO implements HoaDonCTIplm{
         }
         return kq;
     }
+
+    @Override
+    public int updateSP(HoaDonCT ct) {
+        int kq=0;
+        try {
+            PreparedStatement ps = cn.prepareStatement("");
+            
+        } catch (SQLException ex) {
+
+        }
+        return kq;
+    }
     
     
 }

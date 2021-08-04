@@ -32,6 +32,7 @@ public class MainFrame extends javax.swing.JFrame {
     ArrayList<HoaDonCT> listHDCT;
     ArrayList<SanPham> listsp;
     HoaDonCTDAO hdctDAO;
+    int soLuongTemp;
     public MainFrame() {
         initComponents();
         setLocationRelativeTo(null);
@@ -1233,12 +1234,20 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btn_ThemSpVaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemSpVaoHoaDonActionPerformed
         // TODO add your handling code here:
-        HoaDonCT temp= new HoaDonCT();
+        if(maHD.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Chưa tạo hóa đơn");
+        }else{
+        int check=0;
+        if(MaSP.getText().equals("")) check++;
+        if(txtSoLuongNhap.getText().equals(""))check++;
+        if(check==0){
+            HoaDonCT temp= new HoaDonCT();
         temp.setMaHang(Integer.parseInt(MaSP.getText()));
         temp.setSoLuong(Integer.parseInt(txtSoLuongNhap.getText()));
         temp.setMaHoaDon(maHD.getText());
         hdctDAO.addHoaDonCT(temp);
         listHDCT.add(temp);
+        hdctDAO.updateSP(temp);
         fillToHoaDon();
         if(!txtTongTien.getText().equals("")){
             double tongTien= Double.parseDouble(txtTongTien.getText());
@@ -1251,6 +1260,10 @@ public class MainFrame extends javax.swing.JFrame {
             int ck= Integer.parseInt(txtCK.getText());
             tongTien=tongTien-tongTien*ck/100;
             txtTongTien.setText(tongTien+"");
+        }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Nhập đầy đủ các trường");
+        }
         }
         
     }//GEN-LAST:event_btn_ThemSpVaoHoaDonActionPerformed
@@ -1307,6 +1320,7 @@ public class MainFrame extends javax.swing.JFrame {
             MaSP.setText("");
         }else{
             txtDonGia.setText(temp.getGiaBan()+"");
+            soLuongTemp=temp.getSoLuong();
         }
         }
     }//GEN-LAST:event_MaSPFocusLost
@@ -1314,8 +1328,12 @@ public class MainFrame extends javax.swing.JFrame {
     private void txtSoLuongNhapFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoLuongNhapFocusLost
         // TODO add your handling code here:
         int sl= Integer.parseInt(txtSoLuongNhap.getText());
+        if(sl<=soLuongTemp){
         double thanhtien=sl*Double.parseDouble(txtDonGia.getText());
         txtThanhTien.setText(thanhtien+"");
+        }else{
+            txtSoLuongNhap.setText("");
+        }
         
     }//GEN-LAST:event_txtSoLuongNhapFocusLost
 
@@ -1323,7 +1341,7 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(tblHoaDon.getRowCount()==0){
             maKH.setText(maKH1.getText());
-            if(maKH.getText()=="0"){
+            if(maKH.getText().trim().equals("0")){
                 txtCK.setText("0");
             }else{
                 txtCK.setText("5");
