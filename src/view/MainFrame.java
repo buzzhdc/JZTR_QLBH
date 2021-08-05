@@ -756,6 +756,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/product.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanelBanHangLayout = new javax.swing.GroupLayout(jPanelBanHang);
         jPanelBanHang.setLayout(jPanelBanHangLayout);
         jPanelBanHangLayout.setHorizontalGroup(
@@ -786,7 +788,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(43, 43, 43)
                 .addComponent(new_HoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         jMainPanel.add(jPanelBanHang, "card2");
@@ -1682,6 +1684,6 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void setIcon() {
-      jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Add.png")));  
+     // jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Add.png")));  
     }
 }
