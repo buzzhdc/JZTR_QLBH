@@ -1695,6 +1695,12 @@ public class MainFrame extends javax.swing.JFrame {
             tblBaoCao.setModel(model);
             tongHoaDon.setText(r.rowCount+"");
             tongDoanhThu.setText(r.tongTien+"");
+            if(r.rowCount==0){
+                 JOptionPane.showMessageDialog(rootPane,"Không có dữ liệu trong"
+                        + " khoảng thời gian này");
+                dayMin.setText("");
+                dayMax.setText("");
+            }
             
         }else 
             JOptionPane.showMessageDialog
@@ -1725,7 +1731,12 @@ public class MainFrame extends javax.swing.JFrame {
             tblBaoCao.setModel(model);
             tongMatHang.setText(r.rowCount+"");
             tongSLHang.setText(r.tongSL+"");
-            
+            if(r.rowCount==0){
+                JOptionPane.showMessageDialog(rootPane,"Không có dữ liệu trong"
+                        + " khoảng thời gian này");
+                dayMin.setText("");
+                dayMax.setText("");
+            }
         }else 
             JOptionPane.showMessageDialog
         (rootPane,"Nhập đúng định dạng yyyy-MM-dd");
