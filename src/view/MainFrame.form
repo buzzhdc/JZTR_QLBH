@@ -636,7 +636,7 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jPanel1" max="32767" attributes="0"/>
-                          <Component id="jPanel2" pref="530" max="32767" attributes="0"/>
+                          <Component id="jPanel2" pref="561" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="216" max="32767" attributes="0"/>
                   </Group>
@@ -924,7 +924,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                                   <Component id="ThemHoaDon" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="150" max="32767" attributes="0"/>
                                   <Component id="jButton4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                               </Group>
@@ -2010,11 +2010,11 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel49" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel51" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtHDTong" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="225" max="-2" attributes="0"/>
                       <Component id="jLabel50" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel52" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDT" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="165" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -2028,14 +2028,14 @@
                           <Component id="txtTimeStart" min="-2" pref="161" max="-2" attributes="0"/>
                           <Component id="cbbCaLam" min="-2" pref="109" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="120" max="32767" attributes="0"/>
+                      <EmptySpace pref="162" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jLabel48" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txtTimeEnd" min="-2" pref="161" max="-2" attributes="0"/>
-                                  <Component id="cbbMaNV" min="-2" pref="94" max="-2" attributes="0"/>
+                                  <Component id="cbbMaNV" min="-2" pref="126" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="jLabel46" min="-2" max="-2" attributes="0"/>
@@ -2051,9 +2051,11 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
                               <Component id="BaoCaoNV" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
+                              <Component id="BaoCaoNV1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="106" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2077,17 +2079,20 @@
                           <Component id="cbbMaNV" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                      <Component id="BaoCaoNV" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="BaoCaoNV" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BaoCaoNV1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       <Component id="jScrollPane5" min="-2" pref="337" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel49" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel50" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel51" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel52" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtHDTong" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtDT" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="87" max="32767" attributes="0"/>
+                      <EmptySpace pref="114" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2142,12 +2147,13 @@
                   <Font name="Tahoma" size="18" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="5">
-                    <StringItem index="0" value="NV001"/>
-                    <StringItem index="1" value="NV002"/>
-                    <StringItem index="2" value="NV003"/>
-                    <StringItem index="3" value="NV004"/>
-                    <StringItem index="4" value="NV005"/>
+                  <StringArray count="6">
+                    <StringItem index="0" value="T&#x1ea5;t c&#x1ea3;"/>
+                    <StringItem index="1" value="NV001"/>
+                    <StringItem index="2" value="NV002"/>
+                    <StringItem index="3" value="NV003"/>
+                    <StringItem index="4" value="NV004"/>
+                    <StringItem index="5" value="NV005"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -2194,10 +2200,19 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="tblNhanVienCa">
                   <Properties>
+                    <Property name="autoCreateRowSorter" type="boolean" value="true"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="18" style="0"/>
+                    </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="0" rowCount="0"/>
                     </Property>
+                    <Property name="rowHeight" type="int" value="30"/>
+                    <Property name="rowMargin" type="int" value="5"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="tblNhanVienCaPropertyChange"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -2217,7 +2232,7 @@
                 <Property name="text" type="java.lang.String" value="T&#x1ed5;ng doanh thu"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel51">
+            <Component class="javax.swing.JLabel" name="txtHDTong">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="18" style="1"/>
@@ -2225,7 +2240,7 @@
                 <Property name="text" type="java.lang.String" value="--"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel52">
+            <Component class="javax.swing.JLabel" name="txtDT">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="18" style="1"/>
@@ -2242,6 +2257,17 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BaoCaoNVActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="BaoCaoNV1">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="18" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Nh&#xe2;n vi&#xea;n c&#xf3; s&#x1ed1; h&#xf3;a &#x111;&#x1a1;n cao nh&#x1ea5;t"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BaoCaoNV1ActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

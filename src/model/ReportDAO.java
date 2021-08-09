@@ -82,7 +82,7 @@ public class ReportDAO {
             
         } catch (SQLException ex) {
         }
-        }else{
+        }else if(role==2){
             try {
                 PreparedStatement ps = cn.prepareStatement
                 ("select HANGHOA.TENHANG as 'Tên hàng hóa',\n" +
@@ -124,6 +124,46 @@ public class ReportDAO {
                 
             } catch (SQLException ex) {
             }
-        } 
+        }else{
+            try {
+                PreparedStatement ps = cn.prepareStatement
+                ("select NHANVIEN.HOTEN as 'Họ và tên',NHANVIEN.MANV "
+                        + "as 'Mã NV',HOADON.MaHoaDon \n" +
+                    "as 'Hóa Đơn',HOADON.TongTien as 'Tổng tiền' \n" +
+                    " from NHANVIEN \n" +
+                    " inner join HOADON on HOADON.MaNV = NHANVIEN.MANV\n" +
+                    " where NHANVIEN.MANV in \n" +
+                    " (select top 1 NHANVIEN.MANV from NHANVIEN inner join\n" +
+                    " HOADON on HOADON.MaNV = NHANVIEN.MANV\n" +
+                    " where NHANVIEN.MANV in (select top 1 nhanvien.MANV from HOADON \n" +
+                    " inner join NHANVIEN on NHANVIEN.MANV = HOADON.MaNV\n" +
+                    " where CONVERT(date,hoadon.mahoadon,120) \n" +
+                    " between ? and ? \n" +
+                    " group by NHANVIEN.MANV \n" +
+                    " order by count(hoadon.mahoadon) desc))\n" +
+                    " and CONVERT(date,hoadon.mahoadon,120) \n" +
+                    " between ? and ? ");
+                ps.setString(1, min);
+                ps.setString(2,max);
+                ps.setString(3, min);
+                ps.setString(4,max);
+                ResultSet rs = ps.executeQuery();
+            ResultSetMetaData rmd=rs.getMetaData();
+            for(int i=1;i<=rmd.getColumnCount();i++){
+                    head.add(rmd.getColumnName(i));   
+                }
+            while(rs.next()){
+                Vector row = new Vector();
+                for(int i=1; i<=rmd.getColumnCount();i++){
+                    row.add(rs.getString(i));             
+                }
+                data.add(row);
+            }
+                rs.close();
+                ps.close();              
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+            }
+        }
     }
 }
