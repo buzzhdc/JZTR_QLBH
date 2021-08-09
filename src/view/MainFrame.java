@@ -69,32 +69,53 @@ public class MainFrame extends javax.swing.JFrame {
                 sb.append("Mã SP không được để trống\n");
                  kt = false;
             }*/
-            if (Integer.parseInt(txtMaLo.getText()) == 0) {
+            if (txtMaLo.getText().length() == 0) {
                 sb.append("Mã lô không được để trống\n");
                  kt = false;
+            }else if(Integer.parseInt(txtMaLo.getText()) < 0){
+                sb.append("Mã lô không được < 0\n");
+                 kt = false;
             }
-            if (Integer.parseInt(txtMaLoai.getText()) == 0) {
+            if (txtMaLoai.getText().length() == 0) {
                 sb.append("Mã loại không được để trống\n");
                  kt = false;
+            }else if (Integer.parseInt(txtMaLoai.getText()) < 0) {
+                sb.append("Mã loại không được < 0\n");
+                 kt = false;
             }
-            if (Integer.parseInt(txtSoLuong.getText()) == 0) {
+            if (txtSoLuong.getText().length() == 0) {
                 sb.append("Số lượng không được để trống\n");
                  kt = false;
-            }
-            if (Integer.parseInt(txtSoLuongMin.getText()) == 0) {
-                sb.append("Số lượng Min không được để trống\n");
+            }else if (Integer.parseInt(txtSoLuong.getText()) < 0) {
+                sb.append("Số lượng không được < 0\n");
+                 kt = false;
+            }           
+            if (txtSoLuongMin.getText().length() == 0) {
+                sb.append("Số lượng không được để trống\n");
+                 kt = false;
+            }else if (Integer.parseInt(txtSoLuongMin.getText()) < 0) {
+                sb.append("Số lượng Min không được < 0\n");
                  kt = false;
             }
-            if (Double.parseDouble(txtGiaNhap.getText()) == 0) {
+            if (txtGiaNhap.getText().length() == 0) {
                 sb.append("Giá nhập không được để trống\n");
                  kt = false;
-            }
-            if (Double.parseDouble(txtGiaBan.getText()) == 0) {
-                sb.append("Giá bán không được để trống\n");
+            }else if (Double.parseDouble(txtGiaNhap.getText()) < 0) {
+                sb.append("Giá nhập không được < 0\n");
                  kt = false;
             }
-            if (Integer.parseInt(txtHSDMin.getText()) == 0) {
-                sb.append("Hạn sử dụng Min không được để trống\n");
+            if (txtGiaBan.getText().length() == 0) {
+                sb.append("Giá bán không được để trống\n");
+                 kt = false;
+            }else if (Double.parseDouble(txtGiaBan.getText()) < 0) {
+                sb.append("Giá bán không được < 0\n");
+                 kt = false;
+            }
+            if (txtHSDMin.getText().length() == 0) {
+                sb.append("HSD Min không được để trống\n");
+                 kt = false;
+            }else if (Integer.parseInt(txtHSDMin.getText()) < 0) {
+                sb.append("Hạn sử dụng Min không được < 0\n");
                  kt = false;
             }
         } catch (NumberFormatException e) {
@@ -133,7 +154,7 @@ public class MainFrame extends javax.swing.JFrame {
         boolean kt = true;
         StringBuilder sb = new StringBuilder();
         if (txtTenKH.getText().length() == 0) {
-            sb.append("Tên Kh không được để trống\n");
+            sb.append("Tên KH không được để trống\n");
             kt = false;
         }
         try {
