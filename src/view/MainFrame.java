@@ -262,16 +262,17 @@ public class MainFrame extends javax.swing.JFrame {
         tblNhanVienCa.setModel(model);
         try {
             String maNV="";
+            if(cbbMaNV.getSelectedIndex()==0){
+                maNV="";   
+            }else {
+                    maNV= cbbMaNV.getSelectedItem()+"";
+            }
             String sql = "select HOTEN as 'Họ tên',CALAM as 'Ca làm',hoadon.MaNV"
                     + " 'Mã Nhân Viên', mahoadon as 'Mã Hóa Đơn',TongTien as 'Tổng tiền'"
                     + " from NHANVIEN inner join HOADON on HOADON.MaNV = NHANVIEN.MANV "
-                    + "where hoadon.MaNV like '%"+maNV +"%' and CALAM = ? and  "
+                    + "where hoadon.MaNV like '%" +maNV+ "%' and CALAM = ? and  "
                     + "CONVERT(date,hoadon.mahoadon,120) between ? and ? ";
             PreparedStatement ps = cn.prepareStatement(sql);
-            if(cbbMaNV.getSelectedIndex()==0){
-                maNV="";
-            }else 
-                maNV= cbbMaNV.getSelectedItem()+"";          
             ps.setString(1, (String) cbbCaLam.getSelectedItem());
             ps.setString(2, txtTimeStart.getText());
             ps.setString(3, txtTimeEnd.getText());
