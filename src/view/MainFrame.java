@@ -5,6 +5,7 @@
  */
 package view;
 
+import com.sun.javafx.font.LogicalFont;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -45,7 +46,10 @@ public class MainFrame extends javax.swing.JFrame {
     int soLuongTemp;
     Connection cn;
     String url;
-    Vector head, data;
+    Vector <String> head;
+    Vector data;
+    String nhanVien;
+    String caLamViec;
     
     public MainFrame() {
         initComponents();
@@ -60,6 +64,7 @@ public class MainFrame extends javax.swing.JFrame {
         hdctDAO = new HoaDonCTDAO();
         listsp= new ArrayList<>();
         listsp=spDAO.getAll();
+        data = new Vector<>();
         head = new Vector();
         head.add("Họ tên"); head.add("Ca làm"); head.add("Mã nhân viên");
         head.add("Mã hóa đơn"); head.add("Tổng tiền");
@@ -75,6 +80,50 @@ public class MainFrame extends javax.swing.JFrame {
         }
        showNoti();
        setIcon();
+       nhanVien = "test";
+       caLamViec ="2";
+       txtTitle.setText("NHÂN VIÊN: "+ nhanVien+ "--CA LÀM: "+ caLamViec+"");
+    }
+        public MainFrame(String id, String caLam,int role) {
+        initComponents();
+        setLocationRelativeTo(null);
+        VisiblePanel(jPanelBanHang);
+        buttonGroup1.add(rdbNam);
+        buttonGroup1.add(rdbNu);
+        khDAO = new KhachHangDAO();
+        spDAO = new SanPhamDAO();
+        hdDAO = new HoaDonDAO();
+        listHDCT = new ArrayList<>();
+        hdctDAO = new HoaDonCTDAO();
+        listsp= new ArrayList<>();
+        listsp=spDAO.getAll();
+        head = new Vector();
+        if(role==1){
+            jMnHangHoa.setEnabled(false);
+            jMenu1.setEnabled(false);
+            jMnNhanVien.setEnabled(false);
+        }else{
+            jMnHangHoa.setEnabled(true);
+            jMenu1.setEnabled(true);
+            jMnNhanVien.setEnabled(true);
+        }
+        head.add("Họ tên"); head.add("Ca làm"); head.add("Mã nhân viên");
+        head.add("Mã hóa đơn"); head.add("Tổng tiền");
+        url="jdbc:sqlserver://localhost:1433;databaseName=QLBANHANG;userName=sa;password=123";
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            cn=DriverManager.getConnection(url);
+            System.out.println("Connect thành công");
+        }catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+       showNoti();
+       setIcon();
+       nhanVien = id;
+       caLamViec = caLam;
+       txtTitle.setText("NHÂN VIÊN: "+ nhanVien+ "--CA LÀM: "+ caLamViec+"");
     }
     private void showNoti(){
         Notification n= new Notification(this, true);
@@ -257,9 +306,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return kt;
     }
-    void fillTable() {
-        DefaultTableModel model = new DefaultTableModel(data, head);
-        tblNhanVienCa.setModel(model);
+    void fillTable() {   
         try {
             String maNV="";
             if(cbbMaNV.getSelectedIndex()==0){
@@ -277,19 +324,30 @@ public class MainFrame extends javax.swing.JFrame {
             ps.setString(2, txtTimeStart.getText());
             ps.setString(3, txtTimeEnd.getText());
             ResultSet rs = ps.executeQuery();
-            model.setRowCount(0);
             if(rs.next() == false){
                 JOptionPane.showMessageDialog(rootPane,"Không có dữ liệu trong"
                         + " khoảng thời gian này");
             }else{
+                     Vector row1 = new Vector();
+                    row1.add(rs.getString(1));
+                    row1.add(rs.getString(2));
+                    row1.add(rs.getString(3));
+                    row1.add(rs.getString(4));
+                    row1.add(rs.getString(5));
+                   data.add(row1);
+                    
                 while (rs.next()) {
-                    String[] row = new String[]{
-                        rs.getString(1), rs.getString(2), rs.getString(3),
-                        rs.getString(4), rs.getString(5)
-                    };
-                    model.addRow(row);
+                    Vector row = new Vector();
+                    row.add(rs.getString(1));
+                    row.add(rs.getString(2));
+                    row.add(rs.getString(3));
+                    row.add(rs.getString(4));
+                    row.add(rs.getString(5));
+                   data.add(row);
                 }
-                model.fireTableDataChanged();
+                DefaultTableModel model = new DefaultTableModel(data, head);
+               // model.fireTableDataChanged();
+                tblNhanVienCa.setModel(model);
                 txtHDTong.setText(tblNhanVienCa.getRowCount()+"");
                 ArrayList<String> listTongTien = new ArrayList();
                 for(int i=0;i<tblNhanVienCa.getRowCount();i++){
@@ -341,7 +399,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btn_ThemSpVaoHoaDon = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        txtTitle = new javax.swing.JLabel();
         MaSP = new javax.swing.JTextField();
         txtSoLuongNhap = new javax.swing.JTextField();
         txtDonGia = new javax.swing.JTextField();
@@ -455,6 +513,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMnNhanVien = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản Lý Bán Hàng");
@@ -671,9 +730,9 @@ public class MainFrame extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("Hủy");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel5.setText("NHÂN VIÊN: ABC - CA:XYZ");
+        txtTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtTitle.setForeground(new java.awt.Color(0, 0, 255));
+        txtTitle.setText("NHÂN VIÊN: ABC - CA:XYZ");
 
         MaSP.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -718,9 +777,6 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -743,14 +799,17 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addComponent(maKH1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(78, 78, 78)
-                        .addComponent(new_HoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                        .addComponent(new_HoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(MaSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1702,6 +1761,20 @@ public class MainFrame extends javax.swing.JFrame {
         jMnNhanVien.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jMenuBar1.add(jMnNhanVien);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/thoat.png"))); // NOI18N
+        jMenu2.setText("Logout");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu2);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1913,13 +1986,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void new_HoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_HoaDonActionPerformed
         maHD.setText(java.time.LocalDateTime.now()+"");
-        maNV.setText("NV001");
+        maNV.setText(nhanVien);
         maKH.setText("0");
         HoaDon temp = new HoaDon();
         temp.setMaHoaDon(maHD.getText());
         temp.setMaKhachHang(Integer.parseInt(maKH.getText()));
         temp.setTongTien(0);
-        temp.setMaNV("NV001");
+        temp.setMaNV(nhanVien);
         temp.setMaNV(maNV.getText());
         int kq=hdDAO.ThemHoaDon(temp);
         listHDCT.clear();
@@ -2061,7 +2134,9 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void BaoCaoNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BaoCaoNVActionPerformed
+       
         if(checkBaoCao() == true){
+            data.clear();
             fillTable();
         }
     }//GEN-LAST:event_BaoCaoNVActionPerformed
@@ -2103,6 +2178,17 @@ public class MainFrame extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_BaoCaoNV1ActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        // TODO add your handling code here:
+           LoginForm l = new LoginForm();
+           l.setVisible(true);
+           this.dispose();
+    }//GEN-LAST:event_jMenu2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -2209,7 +2295,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -2217,6 +2302,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jMainPanel;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -2282,6 +2368,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtThanhTien;
     private javax.swing.JTextField txtTimeEnd;
     private javax.swing.JTextField txtTimeStart;
+    private javax.swing.JLabel txtTitle;
     private javax.swing.JTextField txtTongTien;
     // End of variables declaration//GEN-END:variables
 
