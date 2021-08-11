@@ -5,7 +5,6 @@
  */
 package view;
 
-import com.sun.javafx.font.LogicalFont;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

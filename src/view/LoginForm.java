@@ -191,11 +191,16 @@ public class LoginForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         String id = txtLoginUserName.getText();
         String pw = txtLoginPassword.getText();
-        String [] arr = new String[4];
+//        if(id.length()==0 && pw.length()==0){
+//            
+//        }else{
+//            
+//        }
+        String [] arr; //= new String[4];
         arr = l.checkLogin(id, pw);
-        if(arr==null){
+        if(arr[0].equals("null")){
             JOptionPane.showMessageDialog
-        (rootPane, "Ten dang nhap hoac mat khau khong dung");
+        (rootPane, "Tên đăng nhập hoặc mật khẩu không đúng");
         }else{
             int role;
             if(arr[0].equals(arr[1])) role =2;

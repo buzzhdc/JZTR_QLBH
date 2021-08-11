@@ -10,8 +10,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -44,6 +42,11 @@ public class LoginDAO {
                 arr[1]=rs.getString(7);//nql
                 arr[2]=rs.getString(8);//ca lam
                 arr[3]=rs.getString(9);//password
+            }else{
+                arr[0]="null";
+                arr[1]="null";
+                arr[2]="null";
+                arr[3]="null";
             }
             rs.close();
             st.close();
