@@ -123,6 +123,7 @@ public class MainFrame extends javax.swing.JFrame {
        nhanVien = id;
        caLamViec = caLam;
        txtTitle.setText("NHÂN VIÊN: "+ nhanVien+ "--CA LÀM: "+ caLamViec+"");
+       data = new Vector();
     }
     private void showNoti(){
         Notification n= new Notification(this, true);
@@ -2135,7 +2136,9 @@ public class MainFrame extends javax.swing.JFrame {
     private void BaoCaoNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BaoCaoNVActionPerformed
        
         if(checkBaoCao() == true){
-            data.clear();
+            if(data.size()>0){
+                data.clear();
+            }
             fillTable();
         }
     }//GEN-LAST:event_BaoCaoNVActionPerformed

@@ -191,13 +191,12 @@ public class LoginForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         String id = txtLoginUserName.getText();
         String pw = txtLoginPassword.getText();
-//        if(id.length()==0 && pw.length()==0){
-//            
-//        }else{
-//            
-//        }
         String [] arr; //= new String[4];
-        arr = l.checkLogin(id, pw);
+        if(id.length()==0 && pw.length()==0){
+                JOptionPane.showMessageDialog
+        (rootPane, "Tên đăng nhập hoặc không được để trống");
+        }else{
+             arr = l.checkLogin(id, pw);
         if(arr[0].equals("null")){
             JOptionPane.showMessageDialog
         (rootPane, "Tên đăng nhập hoặc mật khẩu không đúng");
@@ -209,6 +208,8 @@ public class LoginForm extends javax.swing.JFrame {
             m.setVisible(true);
             this.dispose();
         }
+        }
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtLoginUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginUserNameActionPerformed
