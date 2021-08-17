@@ -38,7 +38,7 @@ public class Notification extends javax.swing.JDialog {
         model.setRowCount(0);
         for(SanPham s: list){
              try {
-                 if(s.isOutOfDate()){
+                 if(s.isOutOfDate() || s.isLowAmout()){
                      Object[] row = new Object[]{
                          s.getMaHang(),s.getLoHang(),s.getTenHang(),s.getNSX(),
                          s.getHSD()
