@@ -192,7 +192,7 @@ public class LoginForm extends javax.swing.JFrame {
         String id = txtLoginUserName.getText();
         String pw = txtLoginPassword.getText();
         String [] arr; //= new String[4];
-        if(id.length()==0 && pw.length()==0){
+        if(id.length()==0 || pw.length()==0){
                 JOptionPane.showMessageDialog
         (rootPane, "Tên đăng nhập hoặc không được để trống");
         }else{

@@ -897,6 +897,14 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel38.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel38.setText("Khách hàng:");
 
+        txtTongTien.setEditable(false);
+
+        txtCK.setEditable(false);
+
+        maKH.setEditable(false);
+
+        maNV.setEditable(false);
+
         jLabel35.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel35.setText("Mã hóa đơn:");
 
